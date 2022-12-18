@@ -4,21 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ItemsController extends Controller
+class ProductsController extends Controller
 {
- 
+    private static function productslist(){
+        return [ 
+            ['id' => 1, 'name' => 'hp', 'count' => 2 , 'selling_price' => 100 , 'buying_price' => 80],
+            ['id' => 2, 'name' => 'lg', 'count' => 2 , 'selling_price' => 100 , 'buying_price' => 80],
+            ['id' => 3, 'name' => 'acer', 'count' => 2 , 'selling_price' => 100 , 'buying_price' => 80],
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    
-
     public function index()
     {
-      
-        
+        return view('products.index', [
+            'items' => self::productslist(),
+        ]);
     }
 
     /**
@@ -50,7 +54,11 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        //
+        $items = self::productslist();
+        $index = array_search($id , array_column($items, 'id'));
+        return view('products.show', [
+            'item' => $items[$index]
+        ]);
     }
 
     /**
