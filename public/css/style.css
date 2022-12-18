@@ -1,0 +1,18 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+nav a{
+    padding: 1.5rem;  
+}
+
+.flexfix{
+    flex-direction: column;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+a:hover{
+    text-decoration: underline;
+}
+li{
+    list-style-type: none;
+}
