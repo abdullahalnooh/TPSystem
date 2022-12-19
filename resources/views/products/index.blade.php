@@ -12,17 +12,24 @@
             <th scope="col">count</th>
             <th scope="col">buying price</th>
             <th scope="col">selling price</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
             @foreach ($items as $item)
+            
                 <tr>  
+                  
                     <th scope="row">{{$item['id']}}</th>
                     <td>{{$item['name']}}</td>
                     <td>{{$item['count']}}</td>
                     <td>{{$item['buying_price']}}</td>
                     <td>{{$item['selling_price']}}</td>
+                    {{-- <td><a href={{route("products.show" , ['item' => $item['id']])}}><button class="btn btn-secondary">edit</button></a></td> --}}
+                  
                 </tr>
+              
+
             @endforeach
           
 

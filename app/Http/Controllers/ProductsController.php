@@ -56,7 +56,10 @@ class ProductsController extends Controller
     {
         $items = self::productslist();
         $index = array_search($id , array_column($items, 'id'));
-        return view('products.show', [
+        if($index === false){
+            abort(404);
+        };
+        return view('products.show' , [
             'item' => $items[$index]
         ]);
     }
