@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductsController extends Controller
 {
@@ -21,7 +21,7 @@ class ProductsController extends Controller
     public function index()
     {
         return view('products.index', [
-            'items' => self::productslist(),
+            'items' => Product::all()
         ]);
     }
 
@@ -32,7 +32,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -42,8 +42,23 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $request->validate([
+            'product-name' => 'required',
+            'product-count' => 'required | integer',
+            'buying-price' => ['required','integer'],
+            'selling-price' => ['required','integer'],
+        ]);
+        $product = new Product();
+        
+        $product->name = strip_tags($request->input('product-name'));
+        $product->count = strip_tags($request->input('product-count'));
+        $product->buying_price = strip_tags($request->input('buying-price'));
+        $product->selling_price = strip_tags($request->input('selling-price'));
+
+        $product->save();
+        return redirect()->route('products.index');
+
     }
 
     /**
@@ -54,13 +69,10 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $items = self::productslist();
-        $index = array_search($id , array_column($items, 'id'));
-        if($index === false){
-            abort(404);
-        };
+        $index = Product::findOrFail($id);
+
         return view('products.show' , [
-            'item' => $items[$index]
+            'item' => $index
         ]);
     }
 
