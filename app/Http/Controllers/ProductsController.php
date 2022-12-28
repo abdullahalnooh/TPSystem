@@ -6,13 +6,6 @@ use App\Models\Product;
 
 class ProductsController extends Controller
 {
-    private static function productslist(){
-        return [ 
-            ['id' => 1, 'name' => 'hp', 'count' => 2 , 'selling_price' => 100 , 'buying_price' => 80],
-            ['id' => 2, 'name' => 'lg', 'count' => 2 , 'selling_price' => 100 , 'buying_price' => 80],
-            ['id' => 3, 'name' => 'acer', 'count' => 2 , 'selling_price' => 100 , 'buying_price' => 80],
-        ];
-    }
     /**
      * Display a listing of the resource.
      *
@@ -87,6 +80,7 @@ class ProductsController extends Controller
         return view('products.edit', [
             'item' => Product::findOrFail($id) 
         ]);
+
     }
 
     /**
@@ -98,21 +92,35 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        // 
+        // $updated->count = strip_tags($request->input('product-count'));
+
+        // $updated->save();
+        // return redirect()->route('products.show' , $id);
+
         $request->validate([
             'product-name' => 'required',
             'product-count' => 'required | integer',
-            'buying-price' => ['required','integer'],
-            'selling-price' => ['required','integer'],
+            'sections' => 'required | in:buying,selling',
         ]);
 
-        $updated = Product::findOrFail($id);
-        $updated->name = strip_tags($request->input('product-name'));
-        $updated->count = strip_tags($request->input('product-count'));
-        $updated->buying_price = strip_tags($request->input('buying-price'));
-        $updated->selling_price = strip_tags($request->input('selling-price'));
-        $updated->save();
-        return redirect()->route('products.show' , $id);
+        $product = Product::findOrFail($id);
+        $section = $request->input('sections');
+        $product->name = strip_tags($request->input('product-name'));
+        $itemnumber = strip_tags($request->input('product-count'));
 
+        if($section == 'buying'){
+            $updatedItemsBought = $product->count + $itemnumber;
+            $product->count = $updatedItemsBought;
+
+        }elseif ($section == 'selling') {
+            $updatedItemssold = $product->count - $itemnumber;
+            $product->count = $updatedItemssold;
+
+        }
+        $product->save();
+        return redirect()->route('products.index');
     }
 
     /**

@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

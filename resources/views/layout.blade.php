@@ -26,8 +26,7 @@
                 <nav class="">
                     <a href="/" class="text-decoration-none text-dark">Home |</a>
                     <a href="{{route('products.index')}}" class="text-decoration-none text-dark">Products |</a>
-                    <a href="/products/create" class="text-decoration-none text-dark">buy |</a>
-                    <a href="/selling" class="text-decoration-none text-dark">sell |</a>
+                    <a href="/products/create" class="text-decoration-none text-dark">buy New Product |</a>
                 </nav>
             </div>
         </div>

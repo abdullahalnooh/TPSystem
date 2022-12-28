@@ -48,7 +48,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'TPSystem'),
+            'database' => env('DB_DATABASE', 'TPSystemDatabase'),
             'username' => env('DB_USERNAME', 'postgres'),
             'password' => env('DB_PASSWORD', 'postgresql'),
             'unix_socket' => env('DB_SOCKET', ''),

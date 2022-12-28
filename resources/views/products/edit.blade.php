@@ -17,8 +17,8 @@
         </div>
         <div class="bt-3 form-check">
             
-            <label for="product-count" class="text-sm form-label">Count</label>
-            <input id="product-count" name="product-count" value="{{$item->count}}" type="text" class="text-lg border-1 form-control" />
+            <label for="product-count" class="text-sm form-label">How many Products</label>
+            <input id="product-count" name="product-count" type="text" class="text-lg border-1 form-control" />
             @error('product-count')
             <p class="text-danger">
                 {{$message}}
@@ -26,23 +26,19 @@
            @enderror
         </div>
         <div class="bt-3 form-check">
-            <label for="buying-price" class="text-sm form-label">Buying price</label>
-            <input id="buying-price" name="buying-price" value="{{$item->buying_price}}" type="text" class="text-lg border-1 form-control" />
-            @error('buying-price')
+            <label for="buying" class="text-sm form-label">Buying</label>
+            <input id="buying" value="buying" name="sections"  type="radio"  />
+            
+            <label for="selling" class="text-sm form-label">selling</label>
+            <input id="selling" value="selling" name="sections"  type="radio"  />
+            
+            @error('sections')
             <p class="text-danger">
                 {{$message}}
                </p>
            @enderror
         </div>
-        <div class="bt-3 form-check">
-            <label for="selling-price" class="text-sm form-label">Selling price</label>
-            <input id="selling-price" type="text" value="{{$item->selling_price}}" name="selling-price" class="text-lg border-1 form-control" />
-            @error('selling-price')
-            <p class="text-danger">
-                {{$message}}
-               </p>
-           @enderror
-        </div>
+        
         <div class="bt-3 form-check">
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </div>
