@@ -84,7 +84,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('products.edit', [
+            'item' => Product::findOrFail($id) 
+        ]);
     }
 
     /**
@@ -96,7 +98,21 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'product-name' => 'required',
+            'product-count' => 'required | integer',
+            'buying-price' => ['required','integer'],
+            'selling-price' => ['required','integer'],
+        ]);
+
+        $updated = Product::findOrFail($id);
+        $updated->name = strip_tags($request->input('product-name'));
+        $updated->count = strip_tags($request->input('product-count'));
+        $updated->buying_price = strip_tags($request->input('buying-price'));
+        $updated->selling_price = strip_tags($request->input('selling-price'));
+        $updated->save();
+        return redirect()->route('products.show' , $id);
+
     }
 
     /**
@@ -107,6 +123,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $to_delete = Product::findOrFail($id);
+        $to_delete->delete();
+        return redirect()->route('products.index');
     }
 }

@@ -25,7 +25,22 @@
                     <td>{{$item['count']}}</td>
                     <td>{{$item['buying_price']}}</td>
                     <td>{{$item['selling_price']}}</td>
-                    <td><a href={{route("products.show" , ['product' => $item['id']])}}><button class="btn btn-secondary">edit</button></a></td>
+                    <td><a href={{route("products.edit" , ['product' => $item['id']])}}><button class="btn btn-secondary">edit</button></a></td>
+                    <td>
+                      <form method="POST" action="{{route("products.destroy" , ['product' => $item['id']])}}">
+                        @csrf
+                        @method('DELETE')
+                        
+                        <button 
+                          class="btn btn-secondary" 
+                          href="{{route('products.destroy' , ['product' => $item['id']])}}" 
+                          value="submit" 
+                          type="submit"
+                          >
+                          delete
+                        </button>
+                      </form>
+                      </td>
                   
                 </tr>
               
