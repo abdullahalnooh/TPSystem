@@ -13,8 +13,17 @@ class ProductsController extends Controller
      */
     public function index()
     {
+        // return view('products.index', [
+        //     'items' => Product::where('user_id', auth()->user()->id)->get()
+        // ]);
+        if (auth()->guest()) {
+            $items = collect();
+        } else {
+            $items = Product::where('user_id', auth()->user()->id)->get();
+        }
+        
         return view('products.index', [
-            'items' => Product::all()
+            'items' => $items,
         ]);
     }
 
@@ -45,9 +54,11 @@ class ProductsController extends Controller
         $product = new Product();
         
         $product->name = strip_tags($request->input('product-name'));
+        $product->user_id = auth()->user()->id;
         $product->count = strip_tags($request->input('product-count'));
         $product->buying_price = strip_tags($request->input('buying-price'));
         $product->selling_price = strip_tags($request->input('selling-price'));
+
 
         $product->save();
         return redirect()->route('products.index');
@@ -77,10 +88,20 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
+        // return view('products.edit', [
+        //     'item' => Product::findOrFail($id) 
+        // ]);
+
+        if (auth()->guest()) {
+            $item = collect();
+        } 
+        else {
+            $item = Product::where('user_id', auth()->user()->id)->get();
+        }
+        
         return view('products.edit', [
             'item' => Product::findOrFail($id) 
         ]);
-
     }
 
     /**

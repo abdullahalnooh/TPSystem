@@ -1,4 +1,5 @@
-@extends('layout')
+@extends('layouts.app')
+
 @section("content")
 <div class="text-bg-light pt-2 flex justify-content-center ">
   

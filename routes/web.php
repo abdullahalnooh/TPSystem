@@ -18,3 +18,10 @@ Route::get('/', [StaticController::class, 'index'])->name('home.index');
 Route::get('/selling',[StaticController::class, 'selling']);
 Route::get('/buying',[StaticController::class, 'buying'] );
 Route::resource('products', ProductsController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
