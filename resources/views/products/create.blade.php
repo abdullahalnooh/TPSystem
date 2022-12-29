@@ -4,6 +4,7 @@
 <div class="text-bg-light pt-2 flex justify-content-center ">
   
     <div class="flex justify-content-center  ">
+        @if (auth()->check())
     <form action="{{route('products.store')}}" method="POST" class="form p-6 mt-5  shadow  bg-white border-2">
         @csrf
 
@@ -47,6 +48,10 @@
         <div class="bt-3 form-check">
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </div>
+    </form>
+    @else
+    {!! redirect()->route('login') !!}
+    @endif
     <div>
 
 </div>

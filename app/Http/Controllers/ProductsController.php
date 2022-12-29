@@ -74,10 +74,15 @@ class ProductsController extends Controller
     public function show($id)
     {
         $index = Product::findOrFail($id);
-
-        return view('products.show' , [
-            'item' => $index
-        ]);
+        // Product::where('user_id', auth()->user()->id)->get($id) works the same result
+        if (auth()->id() !== $index->user_id) {
+            abort(403, 'Unauthorized action.');
+        }else{
+            return view('products.show' , [
+                'item' => $index
+            ]);
+        }
+     
     }
 
     /**

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section("content")
+
+@if (auth()->id() === $item->user_id AND auth()->check()) 
 <div class="text-bg-light pt-2 flex justify-content-center ">
-  
     <div class="flex justify-content-center  ">
     <form action="{{route('products.update' , ['product' => $item->id])}}" method="POST" class="form p-6 mt-5  shadow  bg-white border-2">
         @csrf
@@ -46,4 +47,8 @@
     <div>
 
 </div>
+
+@else
+{!! redirect()->route('products.index') !!}
+@endif
 @endsection
