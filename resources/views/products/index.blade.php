@@ -17,11 +17,12 @@
         </tr>
       </thead>
       <tbody>
+  
           @foreach ($items as $item)
           
               <tr>  
-                
-                  <th scope="row">{{$item['id']}}</th>
+              
+                  <th scope="row">{{ $loop->index + 1 }}</th>
                   <td>{{$item['name']}}</td>
                   <td>{{$item['count']}}</td>
                   <td>{{$item['buying_price']}}</td>
