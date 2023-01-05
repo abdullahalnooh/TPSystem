@@ -10,7 +10,7 @@
                 <div class="card-body">
                   
                     @if (auth()->check())
-                       <p>you are loged in</p>
+                       <p>hello now your are logged into the system , have fun</p>
                     @else
                         <p>You must be logged in to view this content.</p>
                     @endif
